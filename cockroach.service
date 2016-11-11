@@ -1,0 +1,10 @@
+[Unit]
+Description=Cockroach db auto starter
+
+[Service]
+ExecStart=/usr/local/bin/cockroach start --ca-cert=/etc/cockroachdb/certs/ca.cert --cert=/etc/cockroachdb/certs/node.cert --key=/etc/cockroachdb/certs/node.key --store=/var/data/cockroachdb/ --port=26257 --http-port=7005
+ExecStop=/usr/local/bin/cockroach quit --ca-cert=/etc/cockroachdb/certs/ca.cert --cert=/etc/cockroachdb/certs/root.cert --key=/etc/cockroachdb/certs/root.key --http-port=7005
+SyslogIdentifier=cockroachdb
+
+[Install]
+WantedBy=multi-user.target
