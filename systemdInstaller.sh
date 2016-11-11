@@ -21,7 +21,7 @@ function setInstallDirs {
 	extension="${filename##*.}"
 	filename="${filename%.*}"
 	mv -f "$filename/cockroach" "$APP_DIR/cockroach" || exit 1
-    rm -r "$filename"
+    rm -rf "$filename"
 	mkdir -p "$DATA_DIR" || exit 1
 }
   
