@@ -5,6 +5,7 @@ SYSTEMD_DIR="/etc/systemd/system"
 DATA_DIR="/var/data/cockroachdb"
 ETC="/etc/cockroachdb"
 CERT_DIR="$ETC/certs"
+CERT_PRIVATE_DIR="$CERT_DIR/private"
 
 function usage {
 	printf "Cockroachdb Installer\nUsage: $1 /path/to/cockroachdb.tgz [user]\n"
@@ -27,10 +28,10 @@ function setInstallDirs {
   
 function installCerts {
     mkdir -p "$CERT_DIR" || exit 1
-    pushd "$CERT_DIR" || exit 1
-	"$APP_DIR/cockroach" cert create-ca --ca-cert=ca.cert --ca-key=ca.key || exit 1
-	"$APP_DIR/cockroach" cert create-node localhost $(hostname) --ca-cert=ca.cert --ca-key=ca.key --cert=node.cert --key=node.key || exit 1
-	"$APP_DIR/cockroach" cert create-client root --ca-cert=ca.cert --ca-key=ca.key --cert=root.cert --key=root.key || exit 1
+    mkdir -p "$CERT_PRIVATE_DIR" || exit 1
+	"$APP_DIR/cockroach" cert create-ca --certs-dir="$CERT_DIR" --ca-key="$CERT_PRIVATE_DIR/ca.key" || exit 1
+	"$APP_DIR/cockroach" cert create-client root --certs-dir="$CERT_DIR" --ca-key="$CERT_PRIVATE_DIR/ca.key" || exit 1
+	"$APP_DIR/cockroach" cert create-node localhost $(hostname) --certs-dir="$CERT_DIR" --ca-key="$CERT_PRIVATE_DIR/ca.key" || exit 1
 	popd
 }
 
