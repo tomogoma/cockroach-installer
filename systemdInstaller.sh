@@ -51,7 +51,7 @@ function installService {
 #create cconnect script for easier access to the sql console
 function outputConnectUtil {
     touch "/usr/local/bin/cconnect"
-    echo "cockroach sql --ca-cert=/etc/cockroachdb/certs/ca.cert --cert=/etc/cockroachdb/certs/root.cert --key=/etc/cockroachdb/certs/root.key" > "/usr/local/bin/cconnect"
+    echo "cockroach sql --certs-dir=/etc/cockroachdb/certs" > "/usr/local/bin/cconnect"
     chmod +x "/usr/local/bin/cconnect"
 }
 
