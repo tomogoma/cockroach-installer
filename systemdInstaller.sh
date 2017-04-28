@@ -32,7 +32,6 @@ function installCerts {
 	"$APP_DIR/cockroach" cert create-ca --certs-dir="$CERT_DIR" --ca-key="$CERT_PRIVATE_DIR/ca.key" || exit 1
 	"$APP_DIR/cockroach" cert create-client root --certs-dir="$CERT_DIR" --ca-key="$CERT_PRIVATE_DIR/ca.key" || exit 1
 	"$APP_DIR/cockroach" cert create-node localhost $(hostname) --certs-dir="$CERT_DIR" --ca-key="$CERT_PRIVATE_DIR/ca.key" || exit 1
-	popd
 }
 
 function changePerms {
@@ -46,7 +45,7 @@ function changePerms {
 function installService {
 	mkdir -p "$SYSTEMD_DIR" || exit 1
 	cp -f cockroach.service "$SYSTEMD_DIR" || exit 1
-	systemctl enable "$SYSTEMD_DIR/cockroach.service" || exit 1
+	systemctl enable cockroach.service || exit 1
 }
 
 #create cconnect script for easier access to the sql console
