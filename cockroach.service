@@ -5,7 +5,7 @@ Description=Cockroach db auto starter
 WantedBy=multi-user.target
 
 [Service]
-ExecStart=/usr/local/bin/cockroach start --certs-dir=/etc/cockroachdb/certs --store=/var/data/cockroachdb/ --port=26257 --http-port=7005 --logtostderr=true
+ExecStart=/usr/local/bin/cockroach start --certs-dir=/etc/cockroachdb/certs --store=/var/data/cockroachdb/ --port=26257 --http-port=7005 --logtostderr=ERROR
 ExecStop=/usr/local/bin/cockroach quit --certs-dir=/etc/cockroachdb/certs
 SyslogIdentifier=cockroachdb
 Restart=always
