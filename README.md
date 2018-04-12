@@ -5,14 +5,49 @@ An auto-installer of cockroach DB Beta as a service in linux systems
 
 ## Install ##
 
-Currently only systemd is supported
+Currently only systemd is supported.
 
-First download the cockroachdb tarball from https://binaries.cockroachdb.com or search for it in the website: https://www.cockroachlabs.com
+***Note***
 
+If upgrading from `v < 2.0` make sure you
+[log in to the SQL](https://www.cockroachlabs.com/docs/stable/secure-a-cluster.html#step-4-test-the-cluster)
+console
+
+```bash
+cockroach sql --certs-dir=/etc/cockroachdb/certs
 ```
-$ git clone https://github.com/tomogoma/cockroach-installer
-$ cd roach-installer
-$ ./systemdInstaller.sh /path/to/downloaded/cockroach-tarbal.tz
+
+...and run the below command as documented
+[here](https://www.cockroachlabs.com/docs/v1.1/upgrade-cockroach-version.html#finalize-the-upgrade):
+
+```sql
+SET CLUSTER SETTING version = '1.1';
+```
+
+***Install***
+
+First download the cockroachdb tarball from https://binaries.cockroachdb.com or search for it
+in the website: https://www.cockroachlabs.com
+
+Then run the following commands.
+
+```bash
+git clone https://github.com/tomogoma/cockroach-installer
+cd cockroach-installer
+./systemdInstaller.sh /path/to/downloaded/cockroach-tarbal.tz [username]
+```
+
+`username` is optional.
+Providing it allows `@username` to quickly access the SQL console using the `cconnect`
+utility command:
+
+```bash
+cconnect
+```
+
+which is equivalent to:
+```bash
+cockroach sql --certs-dir=/etc/cockroachdb/certs
 ```
 
 
