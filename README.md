@@ -25,8 +25,7 @@ SET CLUSTER SETTING version = '1.1';
 
 ### Get the installer
 
-First download the cockroachdb tarball from https://binaries.cockroachdb.com or search for it
-in the website: https://www.cockroachlabs.com
+First download the cockroachdb tarball from https://www.cockroachlabs.com
 
 Then run the following commands.
 
@@ -60,6 +59,8 @@ and the binary has been saved at `~/Downloads/cockroach.linux-amd64.tgz`
     sudo ./systemdInstaller.sh -u bart ~/Downloads/cockroach-v2.0.2.linux-amd64.tgz
     sudo systemctl start cockroach.root.service
     ```
+    
+    You now have a fully functional CockroachDB listening at `localhost:26257`
     
 1. Install a unit file for the second node:
     
@@ -114,13 +115,7 @@ and the CockroachDB binary is saved at `~/Downloads/cockroach.linux-amd64.tgz`
         sudo systemctl start cockroach.root.service
         ```
     
-    You now have a functional CockroachDB listening at `my.server.url:26257`
-    
-    More configuration options for the installer can be found by running:
-    
-    ```bash
-    ./systemdInstaller --help
-    ```
+    You now have a fully functional CockroachDB listening at `my.server.url:26257`
     
 1. Join other nodes to the cluster
     
