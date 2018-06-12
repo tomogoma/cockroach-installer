@@ -98,7 +98,7 @@ function installCerts {
     local certsDir="$2"
     local privateCertsDir="$certsDir/private"
     if [ -e "$certsDir" ]; then
-        if [ ! -d "$certsDir" ] || [ ! -z "$(ls -A /path/to/dir)" ]; then
+        if [ ! -d "$certsDir" ] || [ ! -z "$(ls -A "$certsDir")" ]; then
            printf "skip creating certs, certs dir ($certsDir) exists and is not empty.\n"
            return
         fi
